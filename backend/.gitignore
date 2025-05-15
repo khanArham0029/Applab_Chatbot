@@ -31,9 +31,9 @@ index.faiss
 index.pkl
 
 # ============================
-# Jupyter
+# Pdf Files
 # ============================
-.ipynb_checkpoints/
+*.pdf
 
 # ============================
 # OS & Editor Files
