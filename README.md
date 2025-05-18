@@ -52,7 +52,7 @@ Powered by:
 ### 1. Clone the Repo
 
 ```bash
-git clone https://github.com/yourusername/DocuChat-AI.git
+git clone https://github.com/khanArham0029/Applab_Chatbot.git
 cd DocuChat-AI
 ```
 
