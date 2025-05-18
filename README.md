@@ -43,7 +43,7 @@ Powered by:
 ##  Project Architect
 
 
-![Architect Design](./assests/architecture-diagram.svg)
+![Architect Design](./assests/Architecture%20Diagram.png)
 
 ---
 
