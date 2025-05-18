@@ -53,7 +53,7 @@ Powered by:
 
 ```bash
 git clone https://github.com/khanArham0029/Applab_Chatbot.git
-cd DocuChat-AI
+cd Applab_Chatbot
 ```
 
 ### 2. Set Up the Backend
