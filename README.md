@@ -118,7 +118,7 @@ GOOGLE_API_KEY=your_gemini_api_key
 
 ---
 
-## 🧪 API Endpoints
+##  API Endpoints
 
 | Endpoint        | Method | Description                          |
 |-----------------|--------|--------------------------------------|
@@ -127,7 +127,7 @@ GOOGLE_API_KEY=your_gemini_api_key
 
 ---
 
-## 🔐 Environment Variables
+##  Environment Variables
 
 Create a `.env` file in `/backend`:
 
