@@ -13,7 +13,7 @@ Powered by:
 
 ##  Demo
 
-![screenshot](public/demo.png) <!-- Optional: Add a screenshot or GIF of the UI -->
+![screenshot](./assests/demo.png) <!-- Optional: Add a screenshot or GIF of the UI -->
 
 ---
 
@@ -40,23 +40,10 @@ Powered by:
 
 ---
 
-##  Project Structure
+##  Project Architect
 
-```
-Applab_Task/
-├── backend/                  # FastAPI + LangChain server
-│   ├── app/
-│   ├── Dockerfile
-│   ├── requirements.txt
-│   └── .env
-├── frontend_testing/
-│   └── docuchat-ai (1)/      # Next.js frontend
-│       ├── app/
-│       ├── components/
-│       ├── styles/
-│       └── Dockerfile
-└── docker-compose.yml
-```
+
+![Architect Design](./assests/architecture-diagram.svg)
 
 ---
 
