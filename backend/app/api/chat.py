@@ -13,7 +13,7 @@ class ChatRequest(BaseModel):
     question: str
 
 @router.post("/chat")
-async def chat(request: ChatRequest):  # ✅ <--- this is the key
+async def chat(request: ChatRequest):  
     safe_name = sanitize_filename(request.filename)
     dir_path = f"embeddings_{safe_name}"
     embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001", google_api_key=GEMINI_KEY)

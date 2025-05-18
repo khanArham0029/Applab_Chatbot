@@ -32,10 +32,10 @@ def get_or_create_faiss_embeddings(text_chunks, file_name):
     faiss_path = dir_path / f"{safe_name}.faiss"
 
     if faiss_path.exists():
-        print("📂 Loading existing FAISS index...")
+        print(" Loading existing FAISS index...")
         return FAISS.load_local(str(dir_path), embeddings, allow_dangerous_deserialization=True)
 
-    print("✨ Creating new FAISS index...")
+    print(" Creating new FAISS index...")
     vector_store = FAISS.from_texts(text_chunks, embedding=embeddings)
     vector_store.save_local(str(dir_path))
     return vector_store
