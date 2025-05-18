@@ -13,22 +13,28 @@ export default function Home() {
   const handleUpload = async (file) => {
     setIsLoading(true)
     try {
-      // This would be replaced with actual API call
-      console.log("Uploading file:", file.name)
+      const formData = new FormData()
+      formData.append("file", file)
 
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500))
+      const response = await fetch("http://localhost:8000/api/upload", {
+        method: "POST",
+        body: formData,
+      })
 
-      setUploadedFile(file)
-      setIsFileProcessed(true)
+      const data = await response.json()
 
-      // Add welcome message
-      setMessages([
-        {
-          role: "assistant",
-          content: `I've processed "${file.name}". Ask me anything about this document!`,
-        },
-      ])
+      if (response.ok) {
+        setUploadedFile(file)
+        setIsFileProcessed(true)
+        setMessages([
+          {
+            role: "assistant",
+            content: `I've processed "${file.name}". Ask me anything about this document!`,
+          },
+        ])
+      } else {
+        console.error("Upload failed", data)
+      }
     } catch (error) {
       console.error("Error uploading file:", error)
     } finally {
@@ -37,30 +43,53 @@ export default function Home() {
   }
 
   const handleSendMessage = async (message) => {
-    if (!message.trim() || isLoading) return
+    if (!message.trim() || isLoading || !uploadedFile) return
 
-    // Add user message to chat
     const newMessages = [...messages, { role: "user", content: message }]
     setMessages(newMessages)
     setIsLoading(true)
 
     try {
-      // This would be replaced with actual API call
-      console.log("Sending message:", message)
+      const response = await fetch("http://localhost:8000/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          filename: uploadedFile.name,
+          question: message,
+        }),
+      })
 
-      // Simulate API response
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      const data = await response.json()
 
-      // Add bot response
+      if (response.ok) {
+        setMessages([
+          ...newMessages,
+          {
+            role: "assistant",
+            content: data.answer || "No response received.",
+          },
+        ])
+      } else {
+        console.error("Chat request failed", data)
+        setMessages([
+          ...newMessages,
+          {
+            role: "assistant",
+            content: "Something went wrong. Please try again.",
+          },
+        ])
+      }
+    } catch (error) {
+      console.error("Error sending message:", error)
       setMessages([
         ...newMessages,
         {
           role: "assistant",
-          content: `This is a simulated response to your question about the document "${uploadedFile?.name}".`,
+          content: "Error processing your request. Please check the console.",
         },
       ])
-    } catch (error) {
-      console.error("Error sending message:", error)
     } finally {
       setIsLoading(false)
     }
@@ -76,7 +105,6 @@ export default function Home() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <UploadForm onUpload={handleUpload} uploadedFile={uploadedFile} isLoading={isLoading} />
-
           <ChatWindow
             messages={messages}
             onSendMessage={handleSendMessage}
