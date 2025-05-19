@@ -95,14 +95,35 @@ export default function Home() {
     }
   }
 
+  const handleNewChat = () => {
+    const confirmReset = window.confirm("Start a new chat? This will clear your uploaded file and messages.")
+    if (confirmReset) {
+      setUploadedFile(null)
+      setIsFileProcessed(false)
+      setMessages([])
+    }
+  }
+
   return (
     <main className="min-h-screen bg-gray-50">
       <div className="container mx-auto px-4 py-8">
-        <header className="mb-8 text-center">
+        <header className="mb-4 text-center">
           <h1 className="text-3xl font-bold text-gray-800">DocuChat AI</h1>
           <p className="text-gray-600">Upload a PDF and chat with its contents</p>
         </header>
 
+        {/* New Chat Button */}
+        <div className="flex justify-end mb-4">
+          <button
+            onClick={handleNewChat}
+            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition disabled:opacity-50"
+            disabled={isLoading}
+          >
+            + New Chat
+          </button>
+        </div>
+
+        {/* Upload + Chat Interface */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <UploadForm onUpload={handleUpload} uploadedFile={uploadedFile} isLoading={isLoading} />
           <ChatWindow
